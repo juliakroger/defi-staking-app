@@ -5,5 +5,8 @@
 Compile truffle
 `truffle compile`
 
-Truffle compile contracts - This will generate the json contract file (at src/truffle_abis)
+Truffle deploy contracts - This will generate the json contract file at src/truffle_abis
 `truffle migrate`
+
+Truffle update and deploy contracts
+`truffle migrate --reset`

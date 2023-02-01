@@ -22,7 +22,10 @@ contract RWD {
         balanceOf[msg.sender] = totalSupply;
     }
 
-    function transfer(address _to, unit _value) public returns (bool success) {
+    function transfer(address _to, uint256 _value)
+        public
+        returns (bool success)
+    {
         // Ensure we have balance to make the transfer.
         require(balanceOf[msg.sender] >= _value);
 
