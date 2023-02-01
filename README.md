@@ -1,6 +1,6 @@
 # defi-staking-app
 
-\*\*Note: make sure you have truffle installed -g
+\*\*Note: make sure you have truffle installed -g and running.
 
 Compile truffle
 `truffle compile`
