@@ -1,5 +1,7 @@
 # defi-staking-app
 
+Contract:
+
 \*\*Note: make sure you have truffle installed -g and running.
 
 Compile truffle
@@ -10,3 +12,6 @@ Truffle deploy contracts - This will generate the json contract file at src/truf
 
 Truffle update and deploy contracts
 `truffle migrate --reset`
+
+Run tests for contract
+`truffle test`
