@@ -19,6 +19,7 @@ contract DecentralBank {
     constructor(RWD _rwd, Tether _tether) public {
         rwd = _rwd;
         tether = _tether;
+        owner = msg.sender;
     }
 
     // Staking function (depositing tether token to the decentral bank for staking)
@@ -34,5 +35,21 @@ contract DecentralBank {
 
         isStaking[msg.sender] = true;
         hasStaked[msg.sender] = true;
+    }
+
+    // Issue Rewards Tokens
+    function issueTokens() public {
+        require(msg.sender == owner);
+
+        for (uint256 i = 0; i < stakers.length; i++) {
+            address recipient = stakers[i];
+            // 10% reward to incentive
+            uint256 reward = stakingBalance[recipient] / 10;
+
+            // Prevent of sending 0 tokens
+            if (reward > 0) {
+                rwd.transfer(recipient, reward);
+            }
+        }
     }
 }

@@ -124,5 +124,19 @@ contract("DecentralBank", ([owner, customer]) => {
       let customerHasStaked = await decentralBank.hasStaked(customer);
       assert.equal(customerHasStaked.toString(), "true");
     });
+
+    it("issueTokens are only allowed to the owner", async () => {
+      await decentralBank.issueTokens({ from: customer }).should.be.rejected;
+    });
+
+    it("issueTokens send the rewards token correctly", async () => {
+      let customerStakingBalance = await decentralBank.stakingBalance(customer);
+      assert.equal(customerStakingBalance, convertToWei("30"));
+
+      await decentralBank.issueTokens({ from: owner });
+
+      let rewardsBalance = await rwd.balanceOf(customer);
+      assert.equal(rewardsBalance, convertToWei("3"));
+    });
   });
 });
