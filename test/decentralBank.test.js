@@ -92,4 +92,37 @@ contract("DecentralBank", ([owner, customer]) => {
     let balance = await rwd.balanceOf(decentralBank.address);
     assert.equal(balance, convertToWei("1000000"));
   });
+
+  describe("Yield Farming", () => {
+    it("matches the balance of rewards token", async () => {
+      let balance = await rwd.balanceOf(decentralBank.address);
+      assert.equal(balance, convertToWei("1000000"));
+    });
+
+    it("depositTokens set balance and staking correctly", async () => {
+      // We need approval first
+      await tether.approve(decentralBank.address, convertToWei("30"), {
+        from: customer,
+      });
+
+      await decentralBank.depositTokens(convertToWei("30"), { from: customer });
+
+      let balance = await tether.balanceOf(customer);
+      assert.equal(balance, convertToWei("70"));
+
+      // Check Updated Balance of Decentral Bank
+      let decentralBankBalance = await tether.balanceOf(decentralBank.address);
+      assert.equal(decentralBankBalance.toString(), convertToWei("30"));
+
+      let customerStakingBalance = await decentralBank.stakingBalance(customer);
+      assert.equal(customerStakingBalance, convertToWei("30"));
+
+      // Is Staking Update
+      let customerIsStaking = await decentralBank.isStaking(customer);
+      assert.equal(customerIsStaking.toString(), "true");
+
+      let customerHasStaked = await decentralBank.hasStaked(customer);
+      assert.equal(customerHasStaked.toString(), "true");
+    });
+  });
 });
