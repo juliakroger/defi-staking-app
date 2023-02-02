@@ -27,7 +27,7 @@
     "web3": "1.8.2"
   },
   "scripts": {
-    "start": "FAST_REFRESH=false react-scripts start",
+    "start": "GENERATE_SOURCEMAP=false FAST_REFRESH=false react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
