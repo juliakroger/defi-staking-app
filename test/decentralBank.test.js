@@ -138,5 +138,22 @@ contract("DecentralBank", ([owner, customer]) => {
       let rewardsBalance = await rwd.balanceOf(customer);
       assert.equal(rewardsBalance, convertToWei("3"));
     });
+
+    it("unstakeToken send back tether correctly", async () => {
+      let customerStakingBalance = await decentralBank.stakingBalance(customer);
+      assert.equal(customerStakingBalance, convertToWei("30"));
+
+      await decentralBank.unstakeToken({ from: customer });
+
+      customerStakingBalance = await decentralBank.stakingBalance(customer);
+      assert.equal(customerStakingBalance, convertToWei("0"));
+
+      let balance = await tether.balanceOf(customer);
+      assert.equal(balance, convertToWei("100"));
+
+      // Customer is no longer staking after unstaking
+      let isStaking = await decentralBank.isStaking(customer);
+      assert.equal(isStaking.toString(), "false");
+    });
   });
 });
