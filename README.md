@@ -15,3 +15,6 @@ Truffle update and deploy contracts
 
 Run tests for contract
 `truffle test`
+
+Execute the issue tokens for the decentral bank contract
+`truffle exec scripts/issue-tokens.js`
