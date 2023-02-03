@@ -23,7 +23,7 @@ const NavBar = ({ account }) => {
           background: "linear-gradient(to right, #9A6AFF, rgb(0, 209, 255))",
         }}
       >
-        {formatAddress(account) || "Connect to Metamask"}
+        {formatAddress(account) || "Connect with Metamask"}
       </button>
     </div>
   );

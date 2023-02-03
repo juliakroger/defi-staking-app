@@ -1,20 +1,21 @@
 # defi-staking-app
 
-Contract:
+This project focuses on developing a DeFi app which implements the concept of yield farming/liquidity mining.
 
-\*\*Note: make sure you have truffle installed -g and running.
+## Dependencies:
 
-Compile truffle
-`truffle compile`
+- NPM
+- Truffle
+- Ganache
 
-Truffle deploy contracts - This will generate the json contract file at src/truffle_abis
-`truffle migrate`
+**Note: make sure you have metamask installed on the browser.**
+**Note: make sure ganache is running.**
 
-Truffle update and deploy contracts
-`truffle migrate --reset`
+## Steps:
 
-Run tests for contract
-`truffle test`
+- Install project dependencies:
 
-Execute the issue tokens for the decentral bank contract
-`truffle exec scripts/issue-tokens.js`
+      npm install
+
+- Deploy smart contracts to the Ethereum test blockchain - This will generate the json contract file at src/truffle_abis
+  truffle migrate
