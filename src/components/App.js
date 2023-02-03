@@ -1,37 +1,42 @@
-import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import NavBar from "./NavBar";
-import Web3 from "web3";
+import { WalletContext } from "../providers/WalletContext";
+import BalanceInfo from "./BalanceInfo";
+import Loader from "./Loader";
+import StakeCard from "./StakeCard";
 
 const App = () => {
-  const [account, setAccount] = useState("");
-
-  const web3 = async () => {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.alert(
-        "Non ethereum browser detected. You should consider Metamask!"
-      );
-    }
-  };
-
-  const loadBlockchainData = async () => {
-    const web3 = window.web3;
-    const accounts = await web3.eth.getAccounts();
-    setAccount(accounts[0]);
-  };
-
-  useEffect(() => {
-    web3();
-    loadBlockchainData();
-  }, []);
+  const { account, balance, isLoading, stakeTokens, unstakeToken } =
+    useContext(WalletContext);
 
   return (
-    <div className="w-screen lg:p-14">
+    <div className="w-screen p-4 lg:p-14 flex flex-col items-center">
       <NavBar account={account} />
+
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="md:mt-6 px-10 w-[600px]">
+          <div className="lg:flex gap-2 justify-center mt-10">
+            <BalanceInfo
+              title="Staking Balance"
+              amount={balance.staking}
+              coin="USDT"
+            />
+            <BalanceInfo
+              title="Reward Balance"
+              amount={balance.rwd}
+              coin="RWD"
+            />
+          </div>
+
+          <StakeCard
+            balance={balance}
+            stakeTokens={stakeTokens}
+            unstakeToken={unstakeToken}
+          />
+        </div>
+      )}
     </div>
   );
 };

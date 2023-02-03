@@ -1,4 +1,4 @@
-import React from "react";
+import formatAddress from "../utils/formatAddress";
 
 const NavBar = ({ account }) => {
   return (
@@ -13,7 +13,18 @@ const NavBar = ({ account }) => {
 
       <div className="flex items-center text-sm gap-2"></div>
 
-      <div>{account}</div>
+      <button
+        onClick={() => {
+          if (!account) {
+          }
+        }}
+        className="p-2 px-4 bg-gray-900 rounded-lg mb-2 flex gap-4 font-bold"
+        style={{
+          background: "linear-gradient(to right, #9A6AFF, rgb(0, 209, 255))",
+        }}
+      >
+        {formatAddress(account) || "Connect to Metamask"}
+      </button>
     </div>
   );
 };
