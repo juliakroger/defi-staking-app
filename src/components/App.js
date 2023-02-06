@@ -6,7 +6,7 @@ import Loader from "./Loader";
 import StakeCard from "./StakeCard";
 
 const App = () => {
-  const { account, balance, isLoading, stakeTokens, unstakeToken } =
+  const { account, balance, isLoading, stakeTokens, unstakeToken, airdrop } =
     useContext(WalletContext);
 
   return (
@@ -34,6 +34,8 @@ const App = () => {
             balance={balance}
             stakeTokens={stakeTokens}
             unstakeToken={unstakeToken}
+            stakingBalance={balance.staking}
+            airdrop={airdrop}
           />
         </div>
       )}

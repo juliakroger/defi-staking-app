@@ -1,7 +1,14 @@
 import { useState } from "react";
 import Web3 from "web3";
+import Airdrop from "./Airdrop";
 
-const StakeCard = ({ balance, stakeTokens, unstakeToken }) => {
+const StakeCard = ({
+  balance,
+  stakeTokens,
+  unstakeToken,
+  airdrop,
+  stakingBalance,
+}) => {
   const [amount, setAmount] = useState("");
 
   return (
@@ -73,7 +80,9 @@ const StakeCard = ({ balance, stakeTokens, unstakeToken }) => {
             </button>
           </div>
 
-          <div className="text-center mt-6 underline text-sky-500">Airdrop</div>
+          {Web3.utils.fromWei(stakingBalance) > 40 ? (
+            <Airdrop callback={airdrop} />
+          ) : null}
         </div>
       </div>
     </div>

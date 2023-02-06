@@ -141,6 +141,11 @@ export const WalletProvider = ({ children }) => {
     }));
   };
 
+  const airdrop = async () => {
+    console.log("airdrop");
+    await contracts.decentralBank.methods.issueTokens();
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -159,6 +164,7 @@ export const WalletProvider = ({ children }) => {
         balance,
         stakeTokens,
         unstakeToken,
+        airdrop,
       }}
     >
       {children}
